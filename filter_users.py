@@ -56,7 +56,11 @@ def main():
         filter_users_by_name(name_to_search)
     elif filter_option == "age":
         age_str = input("Enter an age: ").strip()
-        age = int(age_str)
+        try:
+            age = int(age_str)
+        except ValueError:
+            print(f"Invalid age '{age_str}'.")
+            raise ValueError
         filter_by_age(age)
     elif filter_option == "email":
         email_to_search = input("Enter a (part of) an email to filter users: ").strip()
