@@ -24,6 +24,11 @@ def filter_by_age(age: int):
     print_users(filtered_users)
 
 
+def filter_by_email(email_to_search: str = None):
+    users = read_json("users.json")
+    filtered_users = [user for user in users if email_to_search.lower() in user["email"]]
+    print_users(filtered_users)
+
 def main():
     filter_option = input("What would you like to filter by? "
                           "(Currently, only 'name' and 'age' are supported): ").strip().lower()
@@ -34,6 +39,9 @@ def main():
         age_str = input("Enter an age: ").strip()
         age = int(age_str)
         filter_by_age(age)
+    elif filter_option == "email":
+        email_to_search = input("Enter a (part of) an email to filter users: ").strip()
+        filter_by_email(email_to_search)
     else:
         print("Filtering by that option is not yet supported.")
 
